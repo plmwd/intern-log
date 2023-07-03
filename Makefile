@@ -1,7 +1,9 @@
+build: main.bin
+
 main.bin: main.elf
 	arm-none-eabi-objcopy -O binary main.elf main.bin
 
-sartup.o: startup.s
+startup.o: startup.s
 	arm-none-eabi-as -mcpu=arm926ej-s -g startup.s -o startup.o
 
 main.o: main.c
@@ -13,6 +15,10 @@ main.elf: main.o startup.o linker.ld
 gdb:
 	arm-none-eabi-gdb
 
-run:
+run: main.bin
 	arm-none-eabi-nm -f sysv main.elf | rg '.logs$$' | rg -v '__log_\d+_label'
 	qemu-system-arm -M versatilepb -m 128M -nographic -semihosting  -kernel main.bin
+
+show: main.bin
+	arm-none-eabi-objdump -D -t -s -S main.elf
+	xxd main.bin
