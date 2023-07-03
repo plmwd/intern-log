@@ -4,6 +4,9 @@ byte-addressible symbol names overlayed at address 0x0000. Since the ELF header 
 `.logs` section are set to NOALLOC (adding the "(NOTES)" section attribute), the symbols are not
 loaded.
 
+## Requirements
+- arm-none-eabi toolchain
+
 ## Demo
 The first column is the symbol name (the log message) and the second is its address, the ID.
 
