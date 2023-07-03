@@ -30,7 +30,112 @@ log_id=0x3
 QEMU: Terminated
 ```
 
-The strings nor byte variables are included in the final binary:
+The strings nor byte variables are included in the final binary.
+
+```
+00010180 <main>:
+
+#define LOG(msg) \
+    __LOG(msg, CONCAT(__log_, __COUNTER__))
+
+
+int main() {
+   10180:	e92d4800 	push	{fp, lr}
+   10184:	e28db004 	add	fp, sp, #4
+    print_uart_str("Hello world!\n");
+   10188:	e59f0128 	ldr	r0, [pc, #296]	@ 102b8 <main+0x138>
+   1018c:	ebffffe5 	bl	10128 <print_uart_str>
+    print_uart_uint(0x123456);
+   10190:	e59f0124 	ldr	r0, [pc, #292]	@ 102bc <main+0x13c>
+   10194:	ebffff9d 	bl	10010 <print_uart_uint>
+    LOG("hello world");
+   10198:	e59f3120 	ldr	r3, [pc, #288]	@ 102c0 <main+0x140>
+   1019c:	e5933000 	ldr	r3, [r3]
+   101a0:	e59f211c 	ldr	r2, [pc, #284]	@ 102c4 <main+0x144>
+   101a4:	e5922000 	ldr	r2, [r2]
+   101a8:	e59f1118 	ldr	r1, [pc, #280]	@ 102c8 <main+0x148>
+   101ac:	e7812103 	str	r2, [r1, r3, lsl #2]
+   101b0:	e59f3108 	ldr	r3, [pc, #264]	@ 102c0 <main+0x140>
+   101b4:	e5933000 	ldr	r3, [r3]
+   101b8:	e2833001 	add	r3, r3, #1
+   101bc:	e59f20fc 	ldr	r2, [pc, #252]	@ 102c0 <main+0x140>
+   101c0:	e5823000 	str	r3, [r2]
+   101c4:	e59f0100 	ldr	r0, [pc, #256]	@ 102cc <main+0x14c>
+   101c8:	ebffffd6 	bl	10128 <print_uart_str>
+   101cc:	e59f30f0 	ldr	r3, [pc, #240]	@ 102c4 <main+0x144>
+   101d0:	e5933000 	ldr	r3, [r3]
+   101d4:	e1a00003 	mov	r0, r3
+   101d8:	ebffff8c 	bl	10010 <print_uart_uint>
+    LOG("foo bar");
+   101dc:	e59f30dc 	ldr	r3, [pc, #220]	@ 102c0 <main+0x140>
+   101e0:	e5933000 	ldr	r3, [r3]
+   101e4:	e59f20e4 	ldr	r2, [pc, #228]	@ 102d0 <main+0x150>
+   101e8:	e5922000 	ldr	r2, [r2]
+   101ec:	e59f10d4 	ldr	r1, [pc, #212]	@ 102c8 <main+0x148>
+   101f0:	e7812103 	str	r2, [r1, r3, lsl #2]
+   101f4:	e59f30c4 	ldr	r3, [pc, #196]	@ 102c0 <main+0x140>
+   101f8:	e5933000 	ldr	r3, [r3]
+   101fc:	e2833001 	add	r3, r3, #1
+   10200:	e59f20b8 	ldr	r2, [pc, #184]	@ 102c0 <main+0x140>
+   10204:	e5823000 	str	r3, [r2]
+   10208:	e59f00bc 	ldr	r0, [pc, #188]	@ 102cc <main+0x14c>
+   1020c:	ebffffc5 	bl	10128 <print_uart_str>
+   10210:	e59f30b8 	ldr	r3, [pc, #184]	@ 102d0 <main+0x150>
+   10214:	e5933000 	ldr	r3, [r3]
+   10218:	e1a00003 	mov	r0, r3
+   1021c:	ebffff7b 	bl	10010 <print_uart_uint>
+    LOG("test");
+   10220:	e59f3098 	ldr	r3, [pc, #152]	@ 102c0 <main+0x140>
+   10224:	e5933000 	ldr	r3, [r3]
+   10228:	e59f20a4 	ldr	r2, [pc, #164]	@ 102d4 <main+0x154>
+   1022c:	e5922000 	ldr	r2, [r2]
+   10230:	e59f1090 	ldr	r1, [pc, #144]	@ 102c8 <main+0x148>
+   10234:	e7812103 	str	r2, [r1, r3, lsl #2]
+   10238:	e59f3080 	ldr	r3, [pc, #128]	@ 102c0 <main+0x140>
+   1023c:	e5933000 	ldr	r3, [r3]
+   10240:	e2833001 	add	r3, r3, #1
+   10244:	e59f2074 	ldr	r2, [pc, #116]	@ 102c0 <main+0x140>
+   10248:	e5823000 	str	r3, [r2]
+   1024c:	e59f0078 	ldr	r0, [pc, #120]	@ 102cc <main+0x14c>
+   10250:	ebffffb4 	bl	10128 <print_uart_str>
+   10254:	e59f3078 	ldr	r3, [pc, #120]	@ 102d4 <main+0x154>
+   10258:	e5933000 	ldr	r3, [r3]
+   1025c:	e1a00003 	mov	r0, r3
+   10260:	ebffff6a 	bl	10010 <print_uart_uint>
+    LOG("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc non blandit massa enim nec. Vel orci porta non pulvinar neque laoreet suspendisse interdum. Integer quis auctor elit sed vulputate mi sit amet. Sed vulputate mi sit amet mauris commodo quis imperdiet massa. Nisl pretium fusce id velit ut tortor pretium viverra suspendisse. Faucibus turpis in eu mi bibendum neque. Semper risus in hendrerit gravida rutrum. Velit laoreet id donec ultrices tincidunt. Diam volutpat commodo sed egestas egestas fringilla. Lectus sit amet est placerat in egestas erat. Tincidunt lobortis feugiat vivamus at augue. Pellentesque habitant morbi tristique senectus et netus et. Id neque aliquam vestibulum morbi. Sit amet dictum sit amet justo donec enim diam vulputate. Volutpat lacus laoreet non curabitur gravida arcu ac tortor. Semper auctor neque vitae tempus quam. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim. Purus sit amet volutpat consequat. Vulputate enim nulla aliquet porttitor lacus luctus. Commodo elit at imperdiet dui accumsan sit amet. Enim nulla aliquet porttitor lacus. Est velit egestas dui id ornare arcu. Netus et malesuada fames ac turpis. Vel orci porta non pulvinar neque. Aliquet eget sit amet tellus cras adipiscing enim eu. Phasellus vestibulum lorem sed risus ultricies tristique. In fermentum posuere urna nec tincidunt praesent. Amet nulla facilisi morbi tempus iaculis urna id volutpat lacus. Aenean et tortor at risus. Ac turpis egestas maecenas pharetra convallis posuere. Nulla aliquet porttitor lacus luctus accumsan tortor posuere. Varius morbi enim nunc faucibus a pellentesque sit amet. Lectus mauris ultrices eros in. Tellus mauris a diam maecenas sed enim ut sem. Dui id ornare arcu odio ut sem nulla pharetra diam. Nisi vitae suscipit tellus mauris a diam maecenas. Imperdiet proin fermentum leo vel orci porta non. Metus vulputate eu scelerisque felis imperdiet proin. Mi tempus imperdiet nulla malesuada pellentesque elit eget. Sit amet nisl purus in. Lectus quam id leo in vitae. Nullam eget felis eget nunc lobortis mattis. Malesuada nunc vel risus commodo viverra. Auctor augue mauris augue neque gravida in fermentum et sollicitudin. Aliquet risus feugiat in ante metus dictum at tempor. Quam quisque id diam vel quam elementum pulvinar etiam non. Commodo sed egestas egestas fringilla phasellus faucibus. Habitant morbi tristique senectus et netus et. Sollicitudin tempor id eu nisl. Augue eget arcu dictum varius. Ornare quam viverra orci sagittis eu volutpat odio. Nisi quis eleifend quam adipiscing vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Sed arcu non odio euismod lacinia. Dignissim enim sit amet venenatis urna cursus eget nunc. Dui vivamus arcu felis bibendum ut tristique et. Aliquet porttitor lacus luctus accumsan tortor posuere ac. Nunc sed id semper risus in.");
+   10264:	e59f3054 	ldr	r3, [pc, #84]	@ 102c0 <main+0x140>
+   10268:	e5933000 	ldr	r3, [r3]
+   1026c:	e59f2064 	ldr	r2, [pc, #100]	@ 102d8 <main+0x158>
+   10270:	e5922000 	ldr	r2, [r2]
+   10274:	e59f104c 	ldr	r1, [pc, #76]	@ 102c8 <main+0x148>
+   10278:	e7812103 	str	r2, [r1, r3, lsl #2]
+   1027c:	e59f303c 	ldr	r3, [pc, #60]	@ 102c0 <main+0x140>
+   10280:	e5933000 	ldr	r3, [r3]
+   10284:	e2833001 	add	r3, r3, #1
+   10288:	e59f2030 	ldr	r2, [pc, #48]	@ 102c0 <main+0x140>
+   1028c:	e5823000 	str	r3, [r2]
+   10290:	e59f0034 	ldr	r0, [pc, #52]	@ 102cc <main+0x14c>
+   10294:	ebffffa3 	bl	10128 <print_uart_str>
+   10298:	e59f3038 	ldr	r3, [pc, #56]	@ 102d8 <main+0x158>
+   1029c:	e5933000 	ldr	r3, [r3]
+   102a0:	e1a00003 	mov	r0, r3
+   102a4:	ebffff59 	bl	10010 <print_uart_uint>
+    return (int)(logs[2]);
+   102a8:	e59f3018 	ldr	r3, [pc, #24]	@ 102c8 <main+0x148>
+   102ac:	e5933008 	ldr	r3, [r3, #8]
+}
+   102b0:	e1a00003 	mov	r0, r3
+   102b4:	e8bd8800 	pop	{fp, pc}
+   102b8:	000102e0 	andeq	r0, r1, r0, ror #5
+   102bc:	00123456 	andseq	r3, r2, r6, asr r4
+   102c0:	00010348 	andeq	r0, r1, r8, asr #6
+   102c4:	000102f8 	strdeq	r0, [r1], -r8
+   102c8:	00010308 	andeq	r0, r1, r8, lsl #6
+   102cc:	000102f0 	strdeq	r0, [r1], -r0	@ <UNPREDICTABLE>
+   102d0:	000102fc 	strdeq	r0, [r1], -ip
+   102d4:	00010300 	andeq	r0, r1, r0, lsl #6
+   102d8:	00010304 	andeq	r0, r1, r4, lsl #6
+```
 ```sh
 xxd main.bin
 00000000: 04d0 9fe5 5d00 00eb feff ffea 5013 0100  ....].......P...
