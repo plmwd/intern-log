@@ -32,4 +32,4 @@ QEMU: Terminated
 
 ## Reference
 1. [Hello world for bare metal ARM using QEMU - Jason's Blog](https://jasonblog.github.io/note/arm_emulation/hello_world_for_bare_metal_arm_using_qemu.html)
-2. [Logging with Symbols - Rust Embedonomicon](https://docs.rust-embedded.org/embedonomicon/logging.html)
+2. Better explanation: [Logging with Symbols - Rust Embedonomicon](https://docs.rust-embedded.org/embedonomicon/logging.html)
