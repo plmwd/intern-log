@@ -35,10 +35,10 @@ void print_uart_str(const char *s) {
 
 #define ___LOG(msg, id, label) \
     __asm(".pushsection .logs"); \
-    __asm(".size \"" msg "\", 4"); \
+    __asm(".size \"" msg "\", 1"); \
     __asm(STR(label) ":"); \
     __asm("\"" msg "\":"); \
-    __asm(".word 0"); \
+    __asm(".byte 0"); \
     __asm(".popsection"); \
     extern const int label; \
     static unsigned long int id = (unsigned long int)(&label); \
