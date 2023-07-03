@@ -1,8 +1,8 @@
 # Interned Logs
 This demo shows how to intern logs into unique IDs at link time by turning the log messages into
 byte-addressible symbol names overlayed at address 0x0000. Since the ELF header bits to the special
-`.logs` section are set to NOALLOC (adding the "(NOTES)" section attribute), the symbols are not
-loaded.
+`.logs` section are set to NOALLOC (adding the "(NOTES)" section attribute) the symbols and rodata are not
+loaded in ROM or RAM in the final binary.
 
 ## Requirements
 - arm-none-eabi toolchain
